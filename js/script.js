@@ -19,7 +19,7 @@ const buttonplay = document.getElementById('playbtn');
 function play() {
     console.log('inizio del gioco')
     
-    const NumeroCelle = 100
+    NumeroCelle = 100
     GrigliaGen();
 }
 
@@ -40,11 +40,11 @@ buttonplay.addEventListener('click' , play );
 
     function GrigliaGen() {
             const campodagioco = document.getElementById('campo_gioco');
-            const griglia = document.createElement('div');
+            griglia = document.createElement('div');
             griglia.className = 'griglia';
 
                 // contatore creazione celle
-            for (let i = 1; i <= 100; i++) {
+            for (let i = 1; i <= NumeroCelle; i++) {
                 const Quadrato = QuadratoGen(i)
                 griglia.appendChild(Quadrato)
             }
@@ -52,11 +52,14 @@ buttonplay.addEventListener('click' , play );
     }    
 
     function QuadratoGen(NumQuadrato) {
-        const Quadrato = document.createElement('div')
+        Quadrato = document.createElement('div')
         Quadrato.className = 'quadrato'
         Quadrato.innerHTML = `
             <span> ${NumQuadrato} </span>
         `
-        Griglia.appendChild(Quadrato) 
+        griglia.appendChild(Quadrato) 
         return Quadrato;
     }    
+
+
+    // NOTA BENE LE VARIABILI DELLE FUNZIONI CHE DEVI RIUTILIZZARE IN ALTRE FUNZIONI SCRIVERE SENZA LET E CONST COSI DA TROVARLE NELLO SCOOP GLOBALE.
