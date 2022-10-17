@@ -89,7 +89,13 @@ griglia.appendChild(Quadrato)
 // aggiunge la classe al click
 Quadrato.addEventListener('click' ,function(){
     if (BombP.includes(NumQuadrato)){
-        document.getElementsByClassName('bomb').classList.add('redd')
+        const arraybomb = document.getElementsByClassName('bomb')
+
+        for (let i = 0; i < arraybomb.length; i++) {
+            arraybomb[i].classList.add('redd')
+        }
+
+        // console.log(document.getElementsByClassName('bomb'));
         // this.classList.add('redd');
     }
     else{
