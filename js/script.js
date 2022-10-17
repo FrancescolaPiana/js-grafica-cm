@@ -19,7 +19,89 @@ const buttonplay = document.getElementById('playbtn');
 function play() {
     console.log('inizio del gioco')
     
-    NumeroCelle = 100
+    const NUM_BOMB = 16;
+    let BombP = [];
+
+    campodagioco = document.getElementById('campo_gioco');
+    // svuotiamo il campodagioco
+    campodagioco.innerHTML = '';
+
+    NumeroCelle = 0;
+    const livelloHTML = document.getElementById('livello')
+    const livello = livelloHTML.value;
+
+    switch (livello) {
+        case '1':
+        default:
+        NumeroCelle = 100;
+            break;
+
+        case '2':
+            
+        NumeroCelle = 81;
+            break;
+
+        case '3':
+            
+        NumeroCelle = 25;
+            break;
+    }
+
+        while (BombP.length < NUM_BOMB) {
+            const bomba = randomNumber(1,NumeroCelle)
+            if (!BombP.includes(bomba)) {
+                BombP.push(bomba);
+            }
+        }
+    console.log(BombP);
+
+    // FUNZIONI 
+
+// GENERATORE DI GRIGLIE
+function GrigliaGen() {
+    griglia = document.createElement('div');
+    griglia.className = 'griglia';
+
+        // contatore creazione celle
+    for ( i = 1; i <= NumeroCelle; i++) {
+        const Quadrato = QuadratoGen(i)
+        griglia.appendChild(Quadrato)
+    }
+campodagioco.appendChild(griglia)
+}    
+
+
+// GENERATORE DI QUADRATI
+function QuadratoGen(NumQuadrato) {
+const CelleperRiga = Math.sqrt(NumeroCelle)
+Quadrato = document.createElement('div')
+Quadrato.className = 'quadrato'
+if (BombP.includes(NumQuadrato)){
+    Quadrato.classList.add('bomb');
+}
+Quadrato.style.width = `calc(100% / ${CelleperRiga})`
+Quadrato.style.height = `calc(100% / ${CelleperRiga})`
+Quadrato.innerHTML = `
+    <span id="${NumQuadrato}"> ${NumQuadrato} </span>
+`
+griglia.appendChild(Quadrato) 
+
+// aggiunge la classe al click
+Quadrato.addEventListener('click' ,function(){
+    if (BombP.includes(NumQuadrato)){
+        document.getElementsByClassName('bomb').classList.add('redd')
+        // this.classList.add('redd');
+    }
+    else{
+        this.classList.add('torquoise');
+    }
+    
+})
+return Quadrato;
+}  
+
+
+
     GrigliaGen();
 }
 
@@ -27,39 +109,11 @@ function play() {
 buttonplay.addEventListener('click' , play );
 
 
-
-/* <div    class="griglia">
-        <div    class="quadrato">
-            <span>1</span>
-        </div>
-    </div> 
-*/
+// width: calc(100% / 10);
+// height: calc(100% / 10);
 
 
-// FUNZIONI 
 
-    function GrigliaGen() {
-            const campodagioco = document.getElementById('campo_gioco');
-            griglia = document.createElement('div');
-            griglia.className = 'griglia';
+  
 
-                // contatore creazione celle
-            for (let i = 1; i <= NumeroCelle; i++) {
-                const Quadrato = QuadratoGen(i)
-                griglia.appendChild(Quadrato)
-            }
-    campodagioco.appendChild(griglia)
-    }    
-
-    function QuadratoGen(NumQuadrato) {
-        Quadrato = document.createElement('div')
-        Quadrato.className = 'quadrato'
-        Quadrato.innerHTML = `
-            <span> ${NumQuadrato} </span>
-        `
-        griglia.appendChild(Quadrato) 
-        return Quadrato;
-    }    
-
-
-    // NOTA BENE LE VARIABILI DELLE FUNZIONI CHE DEVI RIUTILIZZARE IN ALTRE FUNZIONI SCRIVERE SENZA LET E CONST COSI DA TROVARLE NELLO SCOOP GLOBALE.
+// NOTA BENE LE VARIABILI DELLE FUNZIONI CHE DEVI RIUTILIZZARE IN ALTRE FUNZIONI SCRIVERE SENZA LET E CONST COSI DA TROVARLE NELLO SCOOP GLOBALE.

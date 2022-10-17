@@ -77,10 +77,12 @@ padding-left: 10px;    font-size: 35px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    width: calc(100% / 10);
-    height: calc(100% / 10);
 }
 
 .torquoise{
-    background-color: turquoise;
+    background-color: rgb(32, 164, 187);
+}
+
+.redd{
+    background-color: rgb(187, 37, 32);
 }
