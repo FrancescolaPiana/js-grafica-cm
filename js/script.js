@@ -12,12 +12,51 @@
 // - con difficoltà 2 => 81 caselle, con un numero compreso tra 1 e 81, divise in 9 caselle per 9 righe;
 // - con difficoltà 3 => 49 caselle, con un numero compreso tra 1 e 49, divise in 7 caselle per 7 righe;
 
-let buttonplay = document.getElementById('playbtn');
+// pressione bottone play
+const buttonplay = document.getElementById('playbtn');
 
 
 function play() {
+    console.log('inizio del gioco')
     
+    const NumeroCelle = 100
+    GrigliaGen();
 }
 
+// evento click al play
+buttonplay.addEventListener('click' , play );
 
-buttonplay.addEventListener('click' , play )
+
+
+/* <div    class="griglia">
+        <div    class="quadrato">
+            <span>1</span>
+        </div>
+    </div> 
+*/
+
+
+// FUNZIONI 
+
+    function GrigliaGen() {
+            const campodagioco = document.getElementById('campo_gioco');
+            const griglia = document.createElement('div');
+            griglia.className = 'griglia';
+
+                // contatore creazione celle
+            for (let i = 1; i <= 100; i++) {
+                const Quadrato = QuadratoGen(i)
+                griglia.appendChild(Quadrato)
+            }
+    campodagioco.appendChild(griglia)
+    }    
+
+    function QuadratoGen(NumQuadrato) {
+        const Quadrato = document.createElement('div')
+        Quadrato.className = 'quadrato'
+        Quadrato.innerHTML = `
+            <span> ${NumQuadrato} </span>
+        `
+        Griglia.appendChild(Quadrato) 
+        return Quadrato;
+    }    
